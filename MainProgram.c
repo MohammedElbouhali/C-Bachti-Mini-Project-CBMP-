@@ -1,6 +1,30 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <string.h>
+
+int ToDecimalConverter(int* digit, int base) {
+	// pretending that the base is valid. And it is by the way ^^.
+	int DecimaledInteger;
+	/**
+	 * Use the switch to treat every particular case.
+	 * Use a recursive for loop, loops n times(digits num)
+	 * [+] Notice: The for loop has to be descending.
+	 * Multiply the base in the digit with the power of a decreased n goes from 0 into n-1.
+	*/
+	return DecimaledInteger;
+}
+
+// In process of treating some bugs..
+int FromDecimalToBBase(int* digit, int base) {
+	int BBase[50], counter = 0;
+	while(*(digit) > base) {
+		BBase[counter] = (*digit % base);
+		*digit /= base;
+		counter++;
+	}
+	return BBase;
+}
 
 bool BaseValidation(int* base, int* ValidBases) {
 	int i;
@@ -13,17 +37,17 @@ bool BaseValidation(int* base, int* ValidBases) {
 }
 
 /**
- * [!] Hint : There's a problem with the number z�ro(0), Especially in the binary
+ * [!] Hint : There's a problem with the number zéro(0), Especially in the binary
  * digits, The func stops in the 0 digit. which means that the binary system can skip
- * that, But the other systems are vulnerable. And any number follows z�ro is ignored.
+ * that, But the other systems are vulnerable. And any number follows zéro is ignored.
  */
-int CountDigitNumbers(int digit) {
-	int counter = 0;
-	
-	while(digit) {
-		digit = digit/10;
-		++counter;
-	}
+// [!] AnotherHint: In the string conversion situation the lefted zéroes are being ignored.
+// [!] Same problem with the logN func. It has a problem with the binary digits(zéro in particular).
+int CountDigitNumbers(int* digit) {
+	char CharacteredNumber[100];
+	sprintf(CharacteredNumber, "%d", *(digit));
+	int counter = strlen(CharacteredNumber);
+	printf("%s\n", CharacteredNumber);
 	return counter;
 }
 
@@ -40,16 +64,6 @@ bool FormatValidation(int digit, int base) {
 		BaseValidNumbers[i] = i;
 	}
 	
-	i = 0;
-	printf("%d", CountDigitNumbers(digit));
-	while(digit != NULL && i<CountDigitNumbers(digit)) {
-		printf("looped %d times.", i);
-		digit = digit/10;
-		if(digit == BaseValidNumbers[i])
-			ValidityStatus = true;
-		++i;
-	}
-	return ValidityStatus;
 }
 
 int main() {
@@ -67,7 +81,11 @@ int main() {
 			printf("Invalid base detected, try again!");
 			return 0;
 	}
-	printf("%d", CountDigitNumbers(01010));
+//	printf("%d", CountDigitNumbers(01010));
+	int MyNumber = 00154;
+	printf("The BBase is: %d", FromDecimalToBBase(&MyNumber, 2));
+	
+	
 	
 	return 0;
 }
